@@ -1,7 +1,7 @@
 //: [Previous](@previous)
 import UIKit
 import PlaygroundSupport
-//: ### Subclassing
+//: ## Subclassing
 //: The mechanism of basing an object or class upon another object or class, retaining similar implementation.
 //: 1. Start by defining a base or abstract class that we should further subclass
 class BaseButton: UIButton {
@@ -29,11 +29,11 @@ class RoundedButton: BaseButton {
 }
 
 //: 3. A more specialized version of `BaseButton` which is filled with a color and has white tint.
-//: Should `RoundedButton` inherit from `BaseButton` or should `FilledButton`? We now have to think about the chain of hierarchy.
+//: Should `RoundedButton` inherit from `BaseButton` or `FilledButton`? We now have to think about the chain of hierarchy.
 class FilledButton: RoundedButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.c1Green()
+        self.backgroundColor = UIColor.c1Green
         self.tintColor = .white
     }
     
@@ -85,7 +85,7 @@ final class MyViewController : UIViewController {
 //        let learnMoreButton = BaseButton(type: .system)
         let learnMoreButton = RoundedButton()
 //        learnMoreButton.contentEdgeInsets = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
-        learnMoreButton.backgroundColor = UIColor(red: 13/255, green: 116/255, blue: 175/255, alpha: 1.0)
+        learnMoreButton.backgroundColor = UIColor.c1Blue
 //        learnMoreButton.clipsToBounds = true
 //        learnMoreButton.layer.cornerRadius = 3
 //        learnMoreButton.tintColor = .white
@@ -96,10 +96,10 @@ final class MyViewController : UIViewController {
         benefitsButton.backgroundColor = .white
 //        benefitsButton.contentEdgeInsets = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
 //        benefitsButton.clipsToBounds = true
-        benefitsButton.layer.borderColor = UIColor.c1Blue().cgColor
+        benefitsButton.layer.borderColor = UIColor.c1Blue.cgColor
         benefitsButton.layer.borderWidth = 2
 //        benefitsButton.layer.cornerRadius = 3
-//        benefitsButton.tintColor = UIColor.c1Blue()
+        benefitsButton.tintColor = UIColor.c1Blue
 //        benefitsButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         benefitsButton.setTitle("See All Card Benefits", for: .normal)
         
@@ -126,15 +126,6 @@ final class MyViewController : UIViewController {
             ])
         
         self.view = view
-    }
-}
-
-extension UIColor {
-    class func c1Blue() -> UIColor {
-        return UIColor(red: 13/255, green: 116/255, blue: 175/255, alpha: 1.0)
-    }
-    class func c1Green() -> UIColor {
-        return UIColor(red: 18/255, green: 128/255, blue: 35/255, alpha: 1.0)
     }
 }
 

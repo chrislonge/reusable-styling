@@ -1,6 +1,6 @@
 import UIKit
 import PlaygroundSupport
-
+//: ## Default Setup
 final class MyViewController : UIViewController {
     override func loadView() {
         
@@ -26,7 +26,7 @@ final class MyViewController : UIViewController {
         passwordField.placeholder = "Password"
 
         let signInButton = UIButton(type: .system)
-        signInButton.backgroundColor = UIColor.c1Green()
+        signInButton.backgroundColor = UIColor.c1Green
         signInButton.contentEdgeInsets = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
         signInButton.clipsToBounds = true
         signInButton.layer.cornerRadius = 3
@@ -35,7 +35,7 @@ final class MyViewController : UIViewController {
         signInButton.setTitle("Sign In", for: .normal)
         
         let learnMoreButton = UIButton(type: .system)
-        learnMoreButton.backgroundColor = UIColor.c1Blue()
+        learnMoreButton.backgroundColor = UIColor.c1Blue
         learnMoreButton.contentEdgeInsets = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
         learnMoreButton.clipsToBounds = true
         learnMoreButton.layer.cornerRadius = 3
@@ -47,10 +47,10 @@ final class MyViewController : UIViewController {
         benefitsButton.backgroundColor = .white
         benefitsButton.contentEdgeInsets = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
         benefitsButton.clipsToBounds = true
-        benefitsButton.layer.borderColor = UIColor.c1Blue().cgColor
+        benefitsButton.layer.borderColor = UIColor.c1Blue.cgColor
         benefitsButton.layer.borderWidth = 2
         benefitsButton.layer.cornerRadius = 3
-        benefitsButton.tintColor = UIColor.c1Blue()
+        benefitsButton.tintColor = UIColor.c1Blue
         benefitsButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         benefitsButton.setTitle("See All Card Benefits", for: .normal)
         
@@ -77,15 +77,6 @@ final class MyViewController : UIViewController {
         ])
         
         self.view = view
-    }
-}
-
-extension UIColor {
-    class func c1Blue() -> UIColor {
-        return UIColor(red: 13/255, green: 116/255, blue: 175/255, alpha: 1.0)
-    }
-    class func c1Green() -> UIColor {
-        return UIColor(red: 18/255, green: 128/255, blue: 35/255, alpha: 1.0)
     }
 }
 
