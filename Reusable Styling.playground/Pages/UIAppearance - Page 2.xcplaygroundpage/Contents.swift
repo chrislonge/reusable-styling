@@ -7,8 +7,8 @@ UIButton.appearance().contentEdgeInsets = UIEdgeInsets(top: 12, left: 16, bottom
 UIButton.appearance().tintColor = .white
 /*:
  `UIAppearance` changes only work on direct view properties (only works one layer deep)
-  * The following two properties don't work when set through UIAppearance proxy.
-*/
+ * The following two properties don't work when set through UIAppearance proxy.
+ */
 UIButton.appearance().titleLabel?.font = .systemFont(ofSize: 18, weight: .semibold)
 UIButton.appearance().layer.cornerRadius = 3
 
@@ -37,8 +37,8 @@ final class MyViewController : UIViewController {
         passwordField.placeholder = "Password"
         
         let signInButton = UIButton(type: .system)
-//        signInButton.contentEdgeInsets = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
         signInButton.backgroundColor = UIColor.init(red: 18/255, green: 128/255, blue: 35/255, alpha: 1.0)
+//        signInButton.contentEdgeInsets = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
         signInButton.clipsToBounds = true
 //        signInButton.layer.cornerRadius = 3
 //        signInButton.tintColor = .white
@@ -46,18 +46,31 @@ final class MyViewController : UIViewController {
         signInButton.setTitle("Sign In", for: .normal)
         
         let learnMoreButton = UIButton(type: .system)
-//        learnMoreButton.contentEdgeInsets = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
         learnMoreButton.backgroundColor = UIColor.init(red: 13/255, green: 116/255, blue: 175/255, alpha: 1.0)
+//        learnMoreButton.contentEdgeInsets = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
+        learnMoreButton.clipsToBounds = true
 //        learnMoreButton.layer.cornerRadius = 3
 //        learnMoreButton.tintColor = .white
 //        learnMoreButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         learnMoreButton.setTitle("Learn More", for: .normal)
         
+        let benefitsButton = UIButton(type: .system)
+        benefitsButton.backgroundColor = .white
+//        benefitsButton.contentEdgeInsets = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
+        benefitsButton.clipsToBounds = true
+        benefitsButton.layer.borderColor = UIColor.c1Blue().cgColor
+        benefitsButton.layer.borderWidth = 2
+//        benefitsButton.layer.cornerRadius = 3
+        benefitsButton.tintColor = UIColor.c1Blue()
+//        benefitsButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        benefitsButton.setTitle("See All Card Benefits", for: .normal)
+        
         let rootStackView = UIStackView(arrangedSubviews: [
             usernameField,
             passwordField,
             signInButton,
-            learnMoreButton
+            learnMoreButton,
+            benefitsButton
             ])
         
         rootStackView.axis = .vertical
@@ -77,6 +90,16 @@ final class MyViewController : UIViewController {
         self.view = view
     }
 }
+
+extension UIColor {
+    class func c1Blue() -> UIColor {
+        return UIColor(red: 13/255, green: 116/255, blue: 175/255, alpha: 1.0)
+    }
+    class func c1Green() -> UIColor {
+        return UIColor(red: 18/255, green: 128/255, blue: 35/255, alpha: 1.0)
+    }
+}
+
 // Present the view controller in the Live View window
 PlaygroundPage.current.liveView = MyViewController()
 
