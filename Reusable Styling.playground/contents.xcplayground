@@ -5,5 +5,7 @@
         <page name='UIAppearance - Page 2'/>
         <page name='Subclassing - Page 3'/>
         <page name='Object Composition - Page 4'/>
+        <page name='Functions - Page 5'/>
+        <page name='Function Composition - Page 6'/>
     </pages>
 </playground>

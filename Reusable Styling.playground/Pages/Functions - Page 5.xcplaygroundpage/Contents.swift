@@ -1,38 +1,27 @@
 //: [Previous](@previous)
 import UIKit
 import PlaygroundSupport
-//: ## Object Composition
-extension UIButton {
-//: Prefer composition over inheritance. Define a static method for creating a button in the base style.
-    static var base: UIButton {
-        let button = UIButton()
-        button.contentEdgeInsets = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
-        return button
-    }
-//: Now use object composition. Use `base` button and override different styles to output `rounded`.
-    static var rounded: UIButton {
-        let button = self.base
-        button.clipsToBounds = true
-        button.layer.cornerRadius = 3
-        return button
-    }
-//: More object composition. Notice chain of hierarchy still matters. Should `filled` be composed from `base` or `rounded`?
-    static var filled: UIButton {
-        let button = self.rounded
-        button.backgroundColor = UIColor.c1Green
-        button.tintColor = .white
-        return button
-    }
-    
-    static var border: UIButton {
-        let button = self.rounded
-        button.backgroundColor = .white
-        button.layer.borderColor = UIColor.c1Blue.cgColor
-        button.layer.borderWidth = 2
-        button.setTitleColor(UIColor.c1Blue, for: .normal)
-        return button
-    }
+//: ## Functions
+
+func baseButtonStyle(_ button: UIButton) {
+    button.contentEdgeInsets = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
+    button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+}
+
+func roundedButtonStyle(_ button: UIButton) {
+    button.clipsToBounds = true
+    button.layer.cornerRadius = 3
+}
+
+func filledButtonStyle(_ button: UIButton) {
+    button.backgroundColor = UIColor.c1Green
+    button.tintColor = .white
+}
+
+func borderButtonStyle(_ button: UIButton) {
+    button.layer.borderColor = UIColor.c1Blue.cgColor
+    button.layer.borderWidth = 2
+    button.setTitleColor(UIColor.c1Blue, for: .normal)
 }
 
 final class MyViewController : UIViewController {
@@ -59,25 +48,34 @@ final class MyViewController : UIViewController {
         passwordField.heightAnchor.constraint(equalToConstant: 44).isActive = true
         passwordField.placeholder = "Password"
         
-        let signInButton = UIButton.filled
-//        signInButton.backgroundColor = UIColor.c1Green()
-//        signInButton.contentEdgeInsets = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
-//        signInButton.clipsToBounds = true
-//        signInButton.layer.cornerRadius = 3
-//        signInButton.tintColor = .white
-//        signInButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        let signInButton = UIButton(type: .system)
+        baseButtonStyle(signInButton)
+        roundedButtonStyle(signInButton)
+        filledButtonStyle(signInButton)
+        //        signInButton.backgroundColor = UIColor.c1Green()
+        //        signInButton.contentEdgeInsets = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
+        //        signInButton.clipsToBounds = true
+        //        signInButton.layer.cornerRadius = 3
+        //        signInButton.tintColor = .white
+        //        signInButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         signInButton.setTitle("Sign In", for: .normal)
         
-        let learnMoreButton = UIButton.filled
+        let learnMoreButton = UIButton(type: .system)
+        baseButtonStyle(learnMoreButton)
+        roundedButtonStyle(learnMoreButton)
+        filledButtonStyle(learnMoreButton)
         learnMoreButton.backgroundColor = UIColor.c1Blue
-//        learnMoreButton.contentEdgeInsets = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
-//        learnMoreButton.clipsToBounds = true
-//        learnMoreButton.layer.cornerRadius = 3
-//        learnMoreButton.tintColor = .white
-//        learnMoreButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        //        learnMoreButton.contentEdgeInsets = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
+        //        learnMoreButton.clipsToBounds = true
+        //        learnMoreButton.layer.cornerRadius = 3
+        //        learnMoreButton.tintColor = .white
+        //        learnMoreButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         learnMoreButton.setTitle("Learn More", for: .normal)
         
-        let benefitsButton = UIButton.border
+        let benefitsButton = UIButton(type: .system)
+        baseButtonStyle(benefitsButton)
+        roundedButtonStyle(benefitsButton)
+        borderButtonStyle(benefitsButton)
 //        benefitsButton.backgroundColor = .white
 //        benefitsButton.contentEdgeInsets = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
 //        benefitsButton.clipsToBounds = true
