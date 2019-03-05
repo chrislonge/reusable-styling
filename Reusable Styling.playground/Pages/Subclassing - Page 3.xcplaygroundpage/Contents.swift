@@ -93,13 +93,14 @@ final class MyViewController : UIViewController {
         learnMoreButton.setTitle("Learn More", for: .normal)
 //: We need another subclass to be able to handle a border style button...
         let benefitsButton = RoundedButton()
-        benefitsButton.backgroundColor = .white
+//        benefitsButton.backgroundColor = .white
 //        benefitsButton.contentEdgeInsets = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
 //        benefitsButton.clipsToBounds = true
         benefitsButton.layer.borderColor = UIColor.c1Blue.cgColor
         benefitsButton.layer.borderWidth = 2
+        benefitsButton.setTitleColor(UIColor.c1Blue, for: .normal)
 //        benefitsButton.layer.cornerRadius = 3
-        benefitsButton.tintColor = UIColor.c1Blue
+//        benefitsButton.tintColor = UIColor.c1Blue
 //        benefitsButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         benefitsButton.setTitle("See All Card Benefits", for: .normal)
         
