@@ -2,37 +2,32 @@
 import UIKit
 import PlaygroundSupport
 //: ## Function Composition
-
-precedencegroup ForwardApplication {
-    associativity: left
+/// Styling that works with all UIViews...
+func roundedStyle(_ view: UIView) {
+    view.clipsToBounds = true
+    view.layer.cornerRadius = 3
 }
-precedencegroup SingleTypeComposition {
-    associativity: right
-    higherThan: ForwardApplication
+func filledStyle(backgroundColor: UIColor = .c1Green, tintColor: UIColor = .white) -> (UIView) -> Void {
+    return {
+        $0.backgroundColor = backgroundColor
+        $0.tintColor = tintColor
+    }
 }
-infix operator <>: SingleTypeComposition
-
-func <> <A: AnyObject>(f: @escaping (A) -> Void, g: @escaping (A) -> Void) -> (A) -> Void {
-    return { a in
-        f(a)
-        g(a)
+func borderStyle(color: UIColor = .c1Blue, borderWidth: CGFloat = 2) -> (UIView) -> Void {
+    return {
+        $0.layer.borderColor = color.cgColor
+        $0.layer.borderWidth = borderWidth
     }
 }
 
-func baseButtonStyle(_ button: UIButton) {
-    button.contentEdgeInsets = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
-    button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+/// Styling for our UIButtons
+let baseButtonStyle: (UIButton) -> Void = {
+    $0.contentEdgeInsets = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
+    $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
 }
-
-func roundedButtonStyle(_ button: UIButton) {
-    button.clipsToBounds = true
-    button.layer.cornerRadius = 3
-}
-
-func filledButtonStyle(_ button: UIButton) {
-    button.backgroundColor = UIColor.c1Green
-    button.tintColor = .white
-}
+let roundedButtonStyle = baseButtonStyle <> roundedStyle
+let filledButtonStyle = roundedButtonStyle <> filledStyle()
+let borderButtonStyle = roundedButtonStyle <> borderStyle() <> { $0.setTitleColor(UIColor.c1Blue, for: .normal) }
 
 final class MyViewController : UIViewController {
     override func loadView() {
@@ -59,40 +54,16 @@ final class MyViewController : UIViewController {
         passwordField.placeholder = "Password"
         
         let signInButton = UIButton(type: .system)
-        baseButtonStyle(signInButton)
-        roundedButtonStyle(signInButton)
         filledButtonStyle(signInButton)
-        //        signInButton.backgroundColor = UIColor.c1Green()
-        //        signInButton.contentEdgeInsets = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
-        //        signInButton.clipsToBounds = true
-        //        signInButton.layer.cornerRadius = 3
-        //        signInButton.tintColor = .white
-        //        signInButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         signInButton.setTitle("Sign In", for: .normal)
         
         let learnMoreButton = UIButton(type: .system)
-        baseButtonStyle(learnMoreButton)
-        roundedButtonStyle(learnMoreButton)
         filledButtonStyle(learnMoreButton)
         learnMoreButton.backgroundColor = UIColor.c1Blue
-        //        learnMoreButton.contentEdgeInsets = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
-        //        learnMoreButton.clipsToBounds = true
-        //        learnMoreButton.layer.cornerRadius = 3
-        //        learnMoreButton.tintColor = .white
-        //        learnMoreButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         learnMoreButton.setTitle("Learn More", for: .normal)
         
         let benefitsButton = UIButton(type: .system)
-        baseButtonStyle(benefitsButton)
-        roundedButtonStyle(benefitsButton)
-        benefitsButton.backgroundColor = .white
-        //        benefitsButton.contentEdgeInsets = UIEdgeInsets(top: 12, left: 16, bottom: 12, right: 16)
-        //        benefitsButton.clipsToBounds = true
-        benefitsButton.layer.borderColor = UIColor.c1Blue.cgColor
-        benefitsButton.layer.borderWidth = 2
-        benefitsButton.layer.cornerRadius = 3
-        benefitsButton.tintColor = UIColor.c1Blue
-        //        benefitsButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        borderButtonStyle(benefitsButton)
         benefitsButton.setTitle("See All Card Benefits", for: .normal)
         
         let rootStackView = UIStackView(arrangedSubviews: [
